@@ -9,12 +9,12 @@ public class MyMath {
     }
 
     public static double abs (double x){
-        if (x> 0.0){
-            return x;
+        if (x < 0){
+            x *= -1;
         }
-        return x *= -1;
+        return x;
     }
-
+    
     public static double pow (double base, int exponent){
 
         double i = 1.0;
