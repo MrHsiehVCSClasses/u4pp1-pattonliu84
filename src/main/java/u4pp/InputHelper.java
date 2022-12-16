@@ -1,30 +1,44 @@
 package u4pp;
+
 import java.util.Scanner;
 
-public class InputHelper {
-    Scanner scanner;
 
-    public void InputHelper(Scanner scanner) {
+public class InputHelper {
+    
+    Scanner scanner = new Scanner (System.in);
+    
+    public InputHelper (Scanner scanner){
         this.scanner = scanner;
     }
 
-    public boolean getYesNoInput(String prompt) {
+    public boolean getYesNoInput (String prompt){
+        boolean question = true;
         System.out.println(prompt);
-        String userInput = this.scanner.next();
-        char firstChar = userInput.charAt(0);
-        String String = "" + firstChar;
-        Boolean valid = char.equals("Y") || char.equals("y") || char.equals("n") ||
-                 char.equals("N");
-        return valid;
+        String answer = scanner.nextLine();
+
+        if (answer.charAt(0) == 'y' || answer.charAt(0) == 'Y'){
+            question = false;
+            return true;
+        } else if (answer.charAt(0) == 'n' || answer.charAt(0) == 'N'){
+            question = false;
+            return false;
+        }
+        System.out.println("Only Y, y, N, n allowed");
+
     }
 
-    public int getIntegerInput(String prompt, int min, int max) {
-        int i = min - 1;
-        while (i < min || i > max) {
+    public int getIntegerInput(String prompt, int min, int max){
+        boolean question = true;
+        while (question == true){
             System.out.println(prompt);
-            String userInput = this.scanner.next();
-            i = Integer.parseInt(userInput);
+            int answer = scanner.nextInt();
+            String answerString = scanner.nextLine();
+            if (answer >= min && answer <= max){
+                question = false;
+                return answer;
+            }
+            System.out.println("Try again");
         }
-        return i;
+        return -1;
     }
 }
